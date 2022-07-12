@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1031070617153",
+    "project_id": "resfast-c48d7",
+    "storage_bucket": "resfast-c48d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031070617153:android:82976bdb4b45aa28f040c0",
+        "android_client_info": {
+          "package_name": "com.example.resfast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031070617153-0rqr0319k643rd7rbjhckfq5jcggec3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5fD7oPB0uT-Hya16O-u0OSsuE18_UueU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031070617153-0rqr0319k643rd7rbjhckfq5jcggec3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
