@@ -119,22 +119,13 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         MainButton(
                             text: ("Sign up"),
-                            press: () {
-                              showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) => Center(
-                                        child: CircularProgressIndicator(),
-                                      ));
+                            press: () async {
                               if (_formKey.currentState!.validate()) {
-                                viewModel.createUserWithEmailAndPassword(
+                                await viewModel.createUserWithEmailAndPassword(
                                     viewModel.emailController.text,
                                     viewModel.passwordController.text);
+                                Navigator.pop(context);
                               }
-
-                              ;
-
-                              Navigator.pop(context);
 
                               ///////////////////////////////////////////////////
                             })

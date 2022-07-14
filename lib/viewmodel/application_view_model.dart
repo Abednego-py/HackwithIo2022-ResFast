@@ -45,7 +45,7 @@ class ApplicationViewModel extends ViewModel {
                   child: Row(
                     children: const [
                       Text(
-                        'Institution registered',
+                        'Complaint registered',
                         style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,

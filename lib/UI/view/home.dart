@@ -19,7 +19,6 @@ class Home extends StatelessWidget {
         viewBuilder: (_, viewModel) => Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
-              iconTheme: const IconThemeData(color: kSecondaryColor),
               elevation: 1,
               actions: [
                 TextButton(
