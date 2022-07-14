@@ -17,73 +17,96 @@ class Home extends StatelessWidget {
         viewModel: locator<LoginViewModel>(),
         disposeVM: false,
         viewBuilder: (_, viewModel) => Scaffold(
-              appBar: AppBar(
-                backgroundColor: Colors.white,
-                iconTheme: const IconThemeData(color: kSecondaryColor),
-                elevation: 1,
-                actions: [
-                  TextButton(
-                    onPressed: () async {
-                      await viewModel.signOut();
-                    },
-                    child: const Text(
-                      'Log out',
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              iconTheme: const IconThemeData(color: kSecondaryColor),
+              elevation: 1,
+              actions: [
+                TextButton(
+                  onPressed: () async {
+                    await viewModel.signOut();
+                  },
+                  child: const Text(
+                    'Log out',
+                    style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Roboto'),
+                  ),
+                ),
+              ],
+            ),
+            body: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      "Resfast",
                       style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Roboto'),
+                        fontSize: 90,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
-                ],
-              ),
-              body: DraggableScrollableSheet(
-                  initialChildSize: 0.6,
-                  builder: (BuildContext context,
-                          ScrollController scrollController) =>
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(25),
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: white,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(50),
+                              topLeft: Radius.circular(50)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              //offset: Offset(0, 3), // changes position of shadow
+                            ),
+                          ]),
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
                         child: Container(
-                            color: overlayColor,
-                            child: Column(children: [
-                              Expanded(
-                                child: GridView.count(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1,
-                                  crossAxisSpacing: 20,
-                                  mainAxisSpacing: 20,
-                                  children: <Widget>[
-                                    CategoryCard(
-                                      title: "Chat with a doctor",
-                                      image: "assets/chat.jpg",
-                                      press: () {
-                                        viewModel.communicate();
-                                      },
-                                    ),
-                                    CategoryCard(
-                                      title: "Fill a form",
-                                      image: "assets/form.jpg",
-                                      press: () {
-                                        Navigator.pushNamed(
-                                            context, "/RegisterComplain");
-                                      },
-                                    ),
-                                    CategoryCard(
-                                      title: "Book an appoint",
-                                      image: "assets/appoint.png",
-                                      press: () {},
-                                    ),
-                                    CategoryCard(
-                                      title: "Make a call",
-                                      image: "assets/phone-call.png",
-                                      press: () {},
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ])),
-                      )),
-            ));
+                          height: 450,
+                          child: GridView.count(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            children: <Widget>[
+                              CategoryCard(
+                                title: "Chat with a doctor",
+                                image: "assets/chat.jpg",
+                                press: () {
+                                  viewModel.communicate();
+                                },
+                              ),
+                              CategoryCard(
+                                title: "Fill a form",
+                                image: "assets/form.jpg",
+                                press: () {
+                                  Navigator.pushNamed(
+                                      context, "/RegisterComplain");
+                                },
+                              ),
+                              CategoryCard(
+                                title: "Book an appoint",
+                                image: "assets/appoint.png",
+                                press: () {},
+                              ),
+                              CategoryCard(
+                                title: "Make a call",
+                                image: "assets/phone-call.png",
+                                press: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ))
+                ])));
   }
 }
 
@@ -131,6 +154,10 @@ class CategoryCard extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
                   )
                 ],
               ),

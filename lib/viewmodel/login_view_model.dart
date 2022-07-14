@@ -40,7 +40,9 @@ class LoginViewModel extends ViewModel {
   }
 
   Future<User?> createUserWithEmailAndPassword(
-      String email, String password, String confirmPassword) async {
+    String email,
+    String password,
+  ) async {
     final credential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -54,8 +56,6 @@ class LoginViewModel extends ViewModel {
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
 
   Future communicate() async {
     try {

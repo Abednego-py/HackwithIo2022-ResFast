@@ -1,5 +1,4 @@
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/mvvm_builder.widget.dart';
 
@@ -116,44 +115,6 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: height(30),
-                        ),
-                        TextFormField(
-                          controller: viewModel.confirmPasswordController,
-                          obscureText: viewModel.isPasswordHidden,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return kPassNullError;
-                            } else if (value.length < 6) {
-                              return "password is too short";
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                            labelText: "Confirm Password",
-                            labelStyle: const TextStyle(color: kSecondaryColor),
-                            hintText: "Confirm Passsword",
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                viewModel.togglePassword();
-                              },
-                              child: Icon(
-                                viewModel.isPasswordHidden
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: primaryColor,
-                              ),
-                            ),
-                            enabledBorder: const OutlineInputBorder(),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: primaryColor),
-                            ),
-                            border: const OutlineInputBorder(),
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                          ),
-                        ),
-                        SizedBox(
                           height: height(61),
                         ),
                         MainButton(
@@ -165,26 +126,12 @@ class RegisterScreen extends StatelessWidget {
                                   builder: (context) => Center(
                                         child: CircularProgressIndicator(),
                                       ));
-
-                              ///////////////////correct////////////////////
-                              // if (_formKey.currentState!.validate()) {
-                              //   viewModel.signIn();
-                              //
-                              //   // Navigator.pushReplacementNamed(context, '/EvnoiaAmin');
-                              // }
-
-                              try {
-                                if (_formKey.currentState!.validate()) {
-                                  viewModel.createUserWithEmailAndPassword(
-                                      viewModel.emailController.text,
-                                      viewModel.passwordController.text,
-                                      viewModel.confirmPasswordController.text);
-                                } else {
-                                  return;
-                                }
-                              } on FirebaseAuthException catch (e) {
-                                print(e);
+                              if (_formKey.currentState!.validate()) {
+                                viewModel.createUserWithEmailAndPassword(
+                                    viewModel.emailController.text,
+                                    viewModel.passwordController.text);
                               }
+
                               ;
 
                               Navigator.pop(context);
