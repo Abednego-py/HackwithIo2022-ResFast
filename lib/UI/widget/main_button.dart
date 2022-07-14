@@ -27,32 +27,17 @@ class MainButton extends StatelessWidget {
                   width: 1.0),
               color: inputFillColor,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.grey,
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: Offset(0, 5), // changes position of shadow
-                ),
-              ],
             ),
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(text!,
-                    textAlign: TextAlign.left,
                     maxLines: 1,
                     style: const TextStyle(
                         color: Colors.black,
                         fontFamily: "Inter",
                         fontWeight: FontWeight.w600,
                         fontSize: 24)),
-                const Spacer(),
-                const Icon(
-                  Icons.double_arrow,
-                  color: primaryColor,
-                ),
               ],
             ),
           ),

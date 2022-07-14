@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const Color primaryColor = Color(0xFF077F59);
-const Color notificationColor = Color(0xFF81C784);
+const Color primaryColor = Color(0xFF0747a1);
+const Color notificationColor = Color(0xFF64b7f6);
 const Color accentColor = Color(0xFFFFF9E3);
 const Color offWhiteGrey = Color(0xFFFAFAFA);
 const Color overlayColor = Color(0x66FFC600);

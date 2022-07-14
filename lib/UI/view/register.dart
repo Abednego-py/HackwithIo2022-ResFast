@@ -1,3 +1,5 @@
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/mvvm_builder.widget.dart';
 
@@ -35,7 +37,7 @@ class RegisterScreen extends StatelessWidget {
                           height: height(97),
                         ),
                         const Text(
-                          'Welcome to resfast',
+                          'Welcome to Resfast',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
@@ -46,7 +48,7 @@ class RegisterScreen extends StatelessWidget {
                           height: height(18),
                         ),
                         const Text(
-                          'Input your log in credentials',
+                          'Create your account and get started',
                           style: TextStyle(
                             color: primaryColor,
                             fontWeight: FontWeight.w400,
@@ -59,6 +61,10 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: viewModel.emailController,
+                          validator: (email) =>
+                              email != null && !EmailValidator.validate(email)
+                                  ? "Enter a valid email"
+                                  : null,
                           decoration: const InputDecoration(
                             labelText: "Email",
                             labelStyle: TextStyle(color: kSecondaryColor),
@@ -72,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: height(70),
+                          height: height(30),
                         ),
                         TextFormField(
                           controller: viewModel.passwordController,
@@ -110,24 +116,79 @@ class RegisterScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
+                          height: height(30),
+                        ),
+                        TextFormField(
+                          controller: viewModel.confirmPasswordController,
+                          obscureText: viewModel.isPasswordHidden,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return kPassNullError;
+                            } else if (value.length < 6) {
+                              return "password is too short";
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            labelText: "Confirm Password",
+                            labelStyle: const TextStyle(color: kSecondaryColor),
+                            hintText: "Confirm Passsword",
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                viewModel.togglePassword();
+                              },
+                              child: Icon(
+                                viewModel.isPasswordHidden
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: primaryColor,
+                              ),
+                            ),
+                            enabledBorder: const OutlineInputBorder(),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: primaryColor),
+                            ),
+                            border: const OutlineInputBorder(),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                          ),
+                        ),
+                        SizedBox(
                           height: height(61),
                         ),
                         MainButton(
-                            text: ("Register"),
+                            text: ("Sign up"),
                             press: () {
+                              showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (context) => Center(
+                                        child: CircularProgressIndicator(),
+                                      ));
+
                               ///////////////////correct////////////////////
                               // if (_formKey.currentState!.validate()) {
                               //   viewModel.signIn();
                               //
                               //   // Navigator.pushReplacementNamed(context, '/EvnoiaAmin');
                               // }
-                              if (_formKey.currentState!.validate()) {
-                                viewModel.createUserWithEmailAndPassword(
-                                    viewModel.emailController.text,
-                                    viewModel.passwordController.text);
+
+                              try {
+                                if (_formKey.currentState!.validate()) {
+                                  viewModel.createUserWithEmailAndPassword(
+                                      viewModel.emailController.text,
+                                      viewModel.passwordController.text,
+                                      viewModel.confirmPasswordController.text);
+                                } else {
+                                  return;
+                                }
+                              } on FirebaseAuthException catch (e) {
+                                print(e);
                               }
+                              ;
 
                               Navigator.pop(context);
+
                               ///////////////////////////////////////////////////
                             })
                       ],

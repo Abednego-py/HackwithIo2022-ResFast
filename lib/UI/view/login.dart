@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:pmvvm/mvvm_builder.widget.dart';
 
@@ -19,7 +20,7 @@ class LoginScreen extends StatelessWidget {
       disposeVM: false,
       viewBuilder: (_, viewModel) => Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(30.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -33,23 +34,20 @@ class LoginScreen extends StatelessWidget {
                         height: height(97),
                       ),
                       const Text(
-                        'Log In',
+                        "Let's sign you in",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 28,
-                          fontFamily: "Roboto",
+                          fontSize: 30,
                         ),
                       ),
                       SizedBox(
                         height: height(18),
                       ),
                       const Text(
-                        'Input your log in credentials',
+                        'Welcome back.',
                         style: TextStyle(
-                          color: primaryColor,
                           fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          fontFamily: "Roboto",
+                          fontSize: 25,
                         ),
                       ),
                       SizedBox(
@@ -57,6 +55,10 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextFormField(
                         controller: viewModel.emailController,
+                        validator: (email) =>
+                            email != null && !EmailValidator.validate(email)
+                                ? "Enter a valid email"
+                                : null,
                         decoration: const InputDecoration(
                           labelText: "Email",
                           labelStyle: TextStyle(color: kSecondaryColor),
@@ -129,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                         height: height(25),
                       ),
                       MainButton(
-                          text: ("Sign Up"),
+                          text: ("Sign up"),
                           press: () {
                             Navigator.pushNamed(context, "/register");
                             ///////////////////////////////////////////////////
